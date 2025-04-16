@@ -270,7 +270,7 @@ button:hover {
   margin-left: 4px;
 }
 
-/* Delete notification styling */
+
 .delete-notification {
   background: rgba(0, 0, 0, 0.05);
   color: #8e8e8e;
@@ -282,7 +282,7 @@ button:hover {
   margin: 8px 0;
 }
 
-/* Animation */
+
 @keyframes messageAppear {
   from {
     opacity: 0;
@@ -304,7 +304,7 @@ button:hover {
   margin-right: 8px;
 }
 
-/* Loading indicator */
+
 .typing-indicator {
   padding: 8px 12px;
   background: #f5f5f5;
@@ -344,13 +344,12 @@ button:hover {
   }
 }
 
-/* Show visible feedback when message is actioned */
 .message.deleting {
   opacity: 0.5;
   transform: scale(0.95);
 }
 
-/* Responsive design */
+
 @media (max-width: 480px) {
   .app-container {
     box-shadow: none;
@@ -388,7 +387,6 @@ button:hover {
   text-align: center;
 }
 
-/* Add these styles if they're not already present */
 .mention-dropdown {
     position: absolute;
     background-color: #fff;
@@ -398,7 +396,7 @@ button:hover {
     overflow-y: auto;
     z-index: 1000;
     display: none;
-    bottom: 60px; /* Adjust this value based on your layout */
+    bottom: 60px; 
     left: 10px;
     width: calc(100% - 20px);
   }
