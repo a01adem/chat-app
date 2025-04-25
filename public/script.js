@@ -8,7 +8,6 @@ let messageHistory = [];
 let historyIndex = -1;
 
 const EMOJIS = [
-    // Smileys & Emotions
     "😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "🥲", "😊",
     "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙",
     "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣",
@@ -17,57 +16,39 @@ const EMOJIS = [
     "🤔", "🤭", "🤫", "🤥", "😶", "😐", "😑", "😬", "🙄", "😯",
     "😦", "😧", "😮", "😲", "🥱", "😴", "😪", "😵", "🤤", "🤢",
     "🤮", "🤧", "😷", "🤒", "🤕", "🤑",
-  
-    // People & Gestures
     "👍", "👎", "👌", "✌️", "🤞", "🤟", "🤘", "🤙", "👈", "👉",
     "👆", "👇", "☝️", "✋", "🤚", "🖐️", "🖖", "👋", "👏", "🙌",
     "👐", "🤲", "🙏", "✍️", "💅", "🤳", "💪", "🦾", "🦵", "🦶",
-  
-    // Hearts & Symbols
     "❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "🤍", "🤎", "💔",
     "❣️", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "☮️",
     "✝️", "☪️", "🕉️", "☸️", "✡️", "🔯", "🕎", "☯️", "☦️", "🛐",
-  
-    // Animals
     "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯",
     "🦁", "🐮", "🐷", "🐸", "🐵", "🙈", "🙉", "🙊", "🐔", "🐧",
     "🐦", "🐤", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄",
-  
-    // Food & Drink
     "🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🫐",
     "🍈", "🍒", "🍑", "🥭", "🍍", "🥥", "🥝", "🍅", "🍆", "🥑",
     "🥦", "🥬", "🥒", "🌶️", "🌽", "🥕", "🧄", "🧅", "🥔", "🍠",
     "🍞", "🥐", "🥖", "🫓", "🥨", "🥯", "🧇", "🥞", "🧈", "🍳",
-  
-    // Objects & Activities
     "🎮", "🎲", "🧩", "🎯", "🏆", "🥇", "🥈", "🥉", "⚽", "🏀",
     "🏈", "⚾", "🎾", "🏐", "🎱", "🏓", "🏸", "🥅", "🎣", "🚗",
     "🚕", "🚙", "🚌", "🚎", "🏎️", "🚓", "🚑", "🚒", "🚐", "🚚",
     "🚛", "🚜", "🛴", "🚲", "🛵", "🏍️", "🛺", "🚤", "🛳️", "✈️",
-  
-    // Nature & Weather
     "🌸", "🌼", "🌻", "🌹", "🌷", "🌱", "🌿", "🍀", "🍁", "🍂",
     "🍃", "🌍", "🌎", "🌏", "🌕", "🌖", "🌗", "🌘", "🌑", "🌒",
     "🌓", "🌔", "🌙", "🌤️", "⛅", "🌥️", "☁️", "🌦️", "🌧️", "⛈️",
     "🌩️", "⚡", "🔥", "💧", "🌊", "❄️", "☃️", "⛄", "🌫️", "🌪️",
-  
-    // Additional Emojis
     "🛸", "🚀", "🛰️", "🛶", "⛵", "🚤", "🛥️", "🛳️", "⛴️", "🚢",
     "✈️", "🛩️", "🛫", "🛬", "🪂", "💺", "🚁", "🚟", "🚠", "🚡",
     "🚂", "🚆", "🚇", "🚊", "🚉", "🚝", "🚄", "🚅", "🚈", "🚞",
     "🚋", "🚌", "🚍", "🚎", "🚐", "🚑", "🚒", "🚓", "🚔", "🚨",
     "🚍", "🚘", "🚖", "🚡", "🚠", "🚟", "🚃", "🚋", "🚞", "🚝"
-
-    
 ]
-
 
 const STATUS = {
   SENT: 'sent',
   DELIVERED: 'delivered',
   READ: 'read'
 };
-
 
 function initEmojiPicker() {
   const emojiPicker = document.getElementById("emojiPicker");
@@ -84,7 +65,6 @@ function initEmojiPicker() {
   });
 }
 
-
 function initMentionDropdown() {
   if (!document.getElementById("mentionDropdown")) {
     const mentionDropdown = document.createElement("div");
@@ -100,6 +80,14 @@ function enterChat() {
     username = input.value.trim();
     document.getElementById("login").style.display = "none";
     document.getElementById("chat").style.display = "flex";
+    
+    if (window.innerWidth >= 768) {
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar) {
+        sidebar.style.display = "block";
+      }
+    }
+    
     document.getElementById("input").focus();
     socket.emit("user joined", username);
     initEmojiPicker();
@@ -108,6 +96,26 @@ function enterChat() {
       activeUsers.push(username);
     }
     socket.emit("mark messages read", { user: username });
+    
+    updateUsersList();
+  }
+}
+
+function updateUsersList() {
+  const usersList = document.getElementById("usersList");
+  if (usersList) {
+    usersList.innerHTML = "";
+    activeUsers.forEach(user => {
+      const userItem = document.createElement("li");
+      userItem.className = "user-item";
+      userItem.innerHTML = `
+        <div class="user-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="user-name">${user}${user === username ? ' (You)' : ''}</div>
+      `;
+      usersList.appendChild(userItem);
+    });
   }
 }
 
@@ -117,18 +125,16 @@ document.getElementById("usernameInput").addEventListener("keypress", function(e
   }
 });
 
-
 document.getElementById("emojiBtn").addEventListener("click", function() {
   const emojiPicker = document.getElementById("emojiPicker");
   emojiPicker.classList.toggle("active");
 });
 
-
 document.addEventListener("click", function(e) {
   if (!e.target.closest("#emojiPicker") && !e.target.closest("#emojiBtn")) {
     document.getElementById("emojiPicker").classList.remove("active");
   }
-if (!e.target.closest("#mentionDropdown") && !e.target.closest("#input")) {
+  if (!e.target.closest("#mentionDropdown") && !e.target.closest("#input")) {
     hideMentionDropdown();
   }
 });
@@ -153,34 +159,33 @@ function exitEditMode() {
 }
 
 socket.on("message history", function(messages) {
-    document.getElementById("messages").innerHTML = "";
-    lastMessageDate = null;
-    messages.forEach(msg => {
-      addMessage({
-        id: msg.id,
-        user: msg.user,
-        text: msg.text,
-        timestamp: msg.timestamp,
-        isSelf: msg.user === username,
-        status: msg.status,
-        mentions: msg.mentions || []
-      });
+  document.getElementById("messages").innerHTML = "";
+  lastMessageDate = null;
+  messages.forEach(msg => {
+    addMessage({
+      id: msg.id,
+      user: msg.user,
+      text: msg.text,
+      timestamp: msg.timestamp,
+      isSelf: msg.user === username,
+      status: msg.status,
+      mentions: msg.mentions || []
     });
-  
-
-    addSystemMessage("New messages");
   });
+
+  addSystemMessage("New messages");
+});
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   if (input.value) {
     const messageText = input.value;
-      messageHistory.push(messageText);
-      historyIndex = messageHistory.length; 
-      const mentions = findMentionsInMessage(messageText);
+    messageHistory.push(messageText);
+    historyIndex = messageHistory.length; 
+    const mentions = findMentionsInMessage(messageText);
     
     if (currentEditingId) {
-       socket.emit("edit message", { 
+      socket.emit("edit message", { 
         id: currentEditingId, 
         user: username, 
         text: messageText,
@@ -222,22 +227,21 @@ form.addEventListener("submit", function (e) {
 });
 
 input.addEventListener("keydown", function(e) {
-    if (e.key === "ArrowUp") {
-      if (historyIndex > 0) {
-        historyIndex--;
-        input.value = messageHistory[historyIndex];
-      }
-    } else if (e.key === "ArrowDown") {
-      if (historyIndex < messageHistory.length - 1) {
-        historyIndex++;
-        input.value = messageHistory[historyIndex];
-      } else {
-        historyIndex = messageHistory.length;
-        input.value = "";
-      }
+  if (e.key === "ArrowUp") {
+    if (historyIndex > 0) {
+      historyIndex--;
+      input.value = messageHistory[historyIndex];
     }
-  });
-  
+  } else if (e.key === "ArrowDown") {
+    if (historyIndex < messageHistory.length - 1) {
+      historyIndex++;
+      input.value = messageHistory[historyIndex];
+    } else {
+      historyIndex = messageHistory.length;
+      input.value = "";
+    }
+  }
+});
 
 socket.on("chat message", function (data) {
   if (data.user !== username) {
@@ -310,17 +314,17 @@ function updateMessageStatus(messageElement, status) {
 }
 
 socket.on("user joined", function(user) {
-    if (user !== username) {
-      addSystemMessage(`${user} joined the chat`);
-      if (!activeUsers.includes(user)) {
-        activeUsers.push(user);
-      }
-      document.querySelectorAll('.message.self-message').forEach(msg => {
-        updateMessageStatus(msg, STATUS.DELIVERED);
-      });
+  if (user !== username) {
+    addSystemMessage(`${user} joined the chat`);
+    if (!activeUsers.includes(user)) {
+      activeUsers.push(user);
     }
-  });
-  
+    document.querySelectorAll('.message.self-message').forEach(msg => {
+      updateMessageStatus(msg, STATUS.DELIVERED);
+    });
+    updateUsersList();
+  }
+});
 
 socket.on("user left", function(user) {
   if (user !== username) {
@@ -329,11 +333,13 @@ socket.on("user left", function(user) {
     if (index !== -1) {
       activeUsers.splice(index, 1);
     }
+    updateUsersList();
   }
 });
 
 socket.on("active users", function(users) {
   activeUsers = users;
+  updateUsersList();
 });
   
 function addSystemMessage(text) {
@@ -343,8 +349,6 @@ function addSystemMessage(text) {
   messages.appendChild(item);
   scrollToBottom();
 }
-
-
 
 function formatTime(timestamp) {
   const date = new Date(timestamp);
@@ -370,6 +374,7 @@ function shouldDisplayDate(timestamp) {
   const currentDate = new Date(timestamp).toDateString();
   return currentDate !== lastMessageDate;
 }
+
 function processMessageText(text) {
   return text.replace(/@(\w+)/g, (match, username) => {
     const isMentioned = activeUsers.includes(username);
@@ -487,6 +492,7 @@ function hideMenus() {
     msg.classList.remove('active');
   });
 }
+
 document.addEventListener("click", function(e) {
   if (!e.target.closest('.message')) {
     hideMenus();
@@ -503,41 +509,50 @@ window.addEventListener('focus', function() {
 
 window.addEventListener('resize', function() {
   scrollToBottom();
+  
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) {
+    if (window.innerWidth >= 768) {
+      sidebar.style.display = 'block';
+    } else {
+      sidebar.style.display = 'none';
+    }
+  }
 });
 
 function showMentionDropdown(inputText) {
-    const mentionDropdown = document.getElementById("mentionDropdown");
-    const lastAtSymbol = inputText.lastIndexOf('@');
-    const filterText = lastAtSymbol !== -1 ? inputText.substring(lastAtSymbol + 1).toLowerCase() : '';
-    const filteredUsers = activeUsers.filter(user => 
-      user !== username && user.toLowerCase().includes(filterText)
-    );
-    
-    if (lastAtSymbol !== -1 && filteredUsers.length > 0) {
-      mentionDropdown.innerHTML = '';
-      filteredUsers.forEach(user => {
-        const userElement = document.createElement("div");
-        userElement.className = "mention-item";
-        userElement.textContent = user;
-        userElement.addEventListener("click", () => {
-          const beforeMention = inputText.substring(0, lastAtSymbol);
-          const afterMention = inputText.substring(lastAtSymbol + filterText.length + 1);
-          input.value = `${beforeMention}@${user} ${afterMention}`;
-          input.focus();
-          hideMentionDropdown();
-        });
-        mentionDropdown.appendChild(userElement);
-      });
-      mentionDropdown.style.display = "block";
-    } else {
-      hideMentionDropdown();
-    }
-  }
+  const mentionDropdown = document.getElementById("mentionDropdown");
+  const lastAtSymbol = inputText.lastIndexOf('@');
+  const filterText = lastAtSymbol !== -1 ? inputText.substring(lastAtSymbol + 1).toLowerCase() : '';
+  const filteredUsers = activeUsers.filter(user => 
+    user !== username && user.toLowerCase().includes(filterText)
+  );
   
-  function hideMentionDropdown() {
-    const mentionDropdown = document.getElementById("mentionDropdown");
-    mentionDropdown.style.display = "none";
+  if (lastAtSymbol !== -1 && filteredUsers.length > 0) {
+    mentionDropdown.innerHTML = '';
+    filteredUsers.forEach(user => {
+      const userElement = document.createElement("div");
+      userElement.className = "mention-item";
+      userElement.textContent = user;
+      userElement.addEventListener("click", () => {
+        const beforeMention = inputText.substring(0, lastAtSymbol);
+        const afterMention = inputText.substring(lastAtSymbol + filterText.length + 1);
+        input.value = `${beforeMention}@${user} ${afterMention}`;
+        input.focus();
+        hideMentionDropdown();
+      });
+      mentionDropdown.appendChild(userElement);
+    });
+    mentionDropdown.style.display = "block";
+  } else {
+    hideMentionDropdown();
   }
+}
+
+function hideMentionDropdown() {
+  const mentionDropdown = document.getElementById("mentionDropdown");
+  mentionDropdown.style.display = "none";
+}
 
 function positionMentionDropdown() {
   const mentionDropdown = document.getElementById("mentionDropdown");
@@ -547,20 +562,18 @@ function positionMentionDropdown() {
 }
 
 input.addEventListener("input", function() {
-    if (this.value.includes('@')) {
-      showMentionDropdown(this.value);
-    } else {
-      hideMentionDropdown();
-    }
-  });
-
+  if (this.value.includes('@')) {
+    showMentionDropdown(this.value);
+  } else {
+    hideMentionDropdown();
+  }
+});
 
 input.addEventListener("keydown", function(e) {
   if (e.key === "Escape") {
     hideMentionDropdown();
   }
 });
-
 
 document.querySelector('.back-button').addEventListener('click', function() {
   if (confirm('Are you sure you want to leave the chat?')) {
@@ -573,4 +586,40 @@ document.querySelector('.back-button').addEventListener('click', function() {
     lastMessageDate = null;
     activeUsers = [];
   }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const themeToggle = document.getElementById('themeToggle');
+  
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      
+      const icon = themeToggle.querySelector('i');
+      if (icon.classList.contains('fa-palette')) {
+        icon.classList.remove('fa-palette');
+        icon.classList.add('fa-moon');
+      } else {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-palette');
+      }
+    });
+  }
+  
+  function checkWindowSize() {
+    const chat = document.getElementById('chat');
+    const sidebar = document.getElementById('sidebar');
+    
+    if (window.innerWidth >= 768) {
+      if (chat && chat.style.display !== 'none') {
+        if (sidebar) sidebar.style.display = 'block';
+      }
+    } else {
+      if (sidebar) sidebar.style.display = 'none';
+    }
+  }
+  
+  checkWindowSize();
+  
+  window.addEventListener('resize', checkWindowSize);
 });
